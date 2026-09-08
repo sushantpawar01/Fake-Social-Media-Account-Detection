@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}About – FSMD{% endblock %}
+{% block content %}
+<h2 class="page-title">About This Project</h2>
+
+<div class="about-grid">
+  <div class="card">
+    <span class="icon"><svg><use href="#icon-info"/></svg></span>
+    <h3>Introduction</h3>
+    <p>Fake social media account detection identifies accounts not operated by genuine users — bots, spam accounts, or impersonators — that spread misinformation, inflate follower counts, or conduct scams. Modern detection systems rely on data analysis, behavioral patterns, network relationships, and machine learning to distinguish real from fake users.</p>
+  </div>
+  <div class="card">
+    <span class="icon"><svg><use href="#icon-link"/></svg></span>
+    <h3>Multi-Source Data Integration</h3>
+    <p>The system analyzes profile details, user behavior (posting frequency, login times), content (messages, comments), and network connections (followers, interactions) to uncover inconsistencies that reveal fake accounts.</p>
+  </div>
+  <div class="card">
+    <span class="icon"><svg><use href="#icon-settings"/></svg></span>
+    <h3>Advanced Feature Engineering</h3>
+    <p>Derives meaningful attributes: posting frequency, activity time gaps, follower/following ratio, account age, and content similarity — revealing hidden patterns that basic data cannot expose.</p>
+  </div>
+  <div class="card">
+    <span class="icon"><svg><use href="#icon-cpu"/></svg></span>
+    <h3>Hybrid Detection Models</h3>
+    <p>Combines supervised learning (labeled data classification), unsupervised learning (anomaly detection), and graph-based models (network relationship analysis) for maximum accuracy.</p>
+  </div>
+  <div class="card">
+    <span class="icon"><svg><use href="#icon-zap"/></svg></span>
+    <h3>Real-Time Detection</h3>
+    <p>Continuously monitors posts, comments, and logins using streaming pipelines and efficient algorithms. Suspicious accounts are flagged or restricted instantly.</p>
+  </div>
+  <div class="card">
+    <span class="icon"><svg><use href="#icon-refresh"/></svg></span>
+    <h3>Continuous Learning & Feedback Loop</h3>
+    <p>The system retrains models using user reports and flagged accounts, refining detection rules and thresholds regularly to adapt to new and evolving fake account tactics.</p>
+  </div>
+</div>
+
+<div class="team-banner card">
+  <span class="icon"><svg><use href="#icon-shield"/></svg></span>
+  <h3>Team Hack Attack</h3>
+  <p>Built as part of the Fake Social Media Account Detection project.</p>
+</div>
+{% endblock %}

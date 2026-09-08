@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}Dashboard – FSMD{% endblock %}
+{% block content %}
+<h2 class="page-title">Detection Dashboard</h2>
+
+<div class="stats-row">
+  <div class="stat-card total">
+    <svg class="stat-icon"><use href="#icon-bar-chart"/></svg>
+    <span class="stat-num">{{ stats.total }}</span>
+    <span class="stat-label">Total Analyzed</span>
+  </div>
+  <div class="stat-card fake">
+    <svg class="stat-icon"><use href="#icon-x-circle"/></svg>
+    <span class="stat-num">{{ stats.fake }}</span>
+    <span class="stat-label">Fake</span>
+  </div>
+  <div class="stat-card suspicious">
+    <svg class="stat-icon"><use href="#icon-alert"/></svg>
+    <span class="stat-num">{{ stats.suspicious }}</span>
+    <span class="stat-label">Suspicious</span>
+  </div>
+  <div class="stat-card genuine">
+    <svg class="stat-icon"><use href="#icon-check-circle"/></svg>
+    <span class="stat-num">{{ stats.genuine }}</span>
+    <span class="stat-label">Genuine</span>
+  </div>
+</div>
+
+<!-- Collected Dataset Panel -->
+<div class="dataset-panel" id="datasetPanel">
+  <div class="dataset-header">
+    <span class="dataset-title">
+      <svg class="inline-icon"><use href="#icon-cpu"/></svg>
+      Collected Pattern Dataset
+    </span>
+    <a href="/api/dataset/download" class="btn btn-outline btn-sm">Download CSV</a>
+  </div>
+  <div class="dataset-stats" id="datasetStats">
+    <span class="ds-loading">Loading...</span>
+  </div>
+</div>
+
+<h3 style="margin-top:2rem">Recent Detections</h3>
+{% if history %}
+<table class="history-table">
+  <thead>
+    <tr><th>Username</th><th>Result</th><th>Risk Score</th><th>Confidence</th></tr>
+  </thead>
+  <tbody>
+    {% for h in history %}
+    <tr>
+      <td>{{ h.username }}</td>
+      <td><span class="badge badge-{{ h.label | lower }}">{{ h.label }}</span></td>
+      <td>{{ h.score }}</td>
+      <td>{{ h.confidence }}%</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="empty-msg">No detections yet. <a href="/detect">Analyze an account</a>.</p>
+{% endif %}
+
+<script>
+fetch("/api/dataset/stats").then(r => r.json()).then(d => {
+  const el = document.getElementById("datasetStats");
+  if (d.total === 0) {
+    el.innerHTML = '<span class="ds-empty">No patterns collected yet — run a detection to start building the dataset.</span>';
+    return;
+  }
+  const platforms = Object.entries(d.platforms)
+    .sort((a,b) => b[1]-a[1])
+    .map(([p,n]) => `<span class="platform-tag">${p} <b>${n}</b></span>`).join("");
+  el.innerHTML = `
+    <div class="ds-row">
+      <div class="ds-stat"><span class="ds-num">${d.total}</span><span class="ds-lbl">Total Rows</span></div>
+      <div class="ds-stat genuine"><span class="ds-num">${d.genuine}</span><span class="ds-lbl">Genuine</span></div>
+      <div class="ds-stat suspicious"><span class="ds-num">${d.suspicious}</span><span class="ds-lbl">Suspicious</span></div>
+      <div class="ds-stat fake"><span class="ds-num">${d.fake}</span><span class="ds-lbl">Fake</span></div>
+    </div>
+    <div class="ds-platforms">${platforms}</div>
+  `;
+});
+</script>
+{% endblock %}

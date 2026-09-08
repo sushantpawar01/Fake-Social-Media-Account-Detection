@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}Fake Social Media Account Detection{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+</head>
+<body>
+
+  <!-- SVG sprite -->
+  <div style="display:none">
+    {% include "icons.svg" %}
+  </div>
+
+  <nav class="navbar">
+    <a class="brand" href="/">
+      <svg class="nav-icon brand-icon"><use href="#icon-shield"/></svg>
+      FSMD
+    </a>
+    <div class="nav-links">
+      <a href="/">
+        <svg class="nav-icon"><use href="#icon-home"/></svg>Home
+      </a>
+      <a href="/detect">
+        <svg class="nav-icon"><use href="#icon-search"/></svg>Detect
+      </a>
+      <a href="/dashboard">
+        <svg class="nav-icon"><use href="#icon-bar-chart"/></svg>Dashboard
+      </a>
+      <a href="/about">
+        <svg class="nav-icon"><use href="#icon-info"/></svg>About
+      </a>
+    </div>
+  </nav>
+
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <p>Fake Social Media Account Detection &mdash; Team Hack Attack</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bg.js') }}"></script>
+</body>
+</html>

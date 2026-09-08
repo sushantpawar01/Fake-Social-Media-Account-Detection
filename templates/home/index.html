@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Home – FSMD{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><use href="#icon-shield"/></svg>
+  </div>
+  <h1>Fake Social Media Account Detection</h1>
+  <p class="subtitle">Identify bots, spam accounts, and impersonators using multi-source data analysis, advanced feature engineering, and hybrid detection models.</p>
+  <a href="/detect" class="btn btn-primary">Start Detection</a>
+  <a href="/about" class="btn btn-outline">Learn More</a>
+</section>
+
+<section class="features-grid">
+  <div class="card">
+    <span class="icon"><svg><use href="#icon-link"/></svg></span>
+    <h3>Multi-Source Data Integration</h3>
+    <p>Analyzes profile details, user behavior, content, and network connections for a complete account picture.</p>
+  </div>
+  <div class="card">
+    <span class="icon"><svg><use href="#icon-settings"/></svg></span>
+    <h3>Advanced Feature Engineering</h3>
+    <p>Derives posting frequency, follower/following ratio, account age, and content similarity signals.</p>
+  </div>
+  <div class="card">
+    <span class="icon"><svg><use href="#icon-cpu"/></svg></span>
+    <h3>Hybrid Detection Models</h3>
+    <p>Combines supervised, unsupervised, and graph-based methods to detect both known and new fake accounts.</p>
+  </div>
+  <div class="card">
+    <span class="icon"><svg><use href="#icon-zap"/></svg></span>
+    <h3>Real-Time Detection</h3>
+    <p>Continuously monitors activities and flags suspicious accounts instantly using streaming pipelines.</p>
+  </div>
+  <div class="card">
+    <span class="icon"><svg><use href="#icon-refresh"/></svg></span>
+    <h3>Continuous Learning</h3>
+    <p>Feedback loop retrains models using user reports and flagged accounts to adapt to evolving threats.</p>
+  </div>
+  <div class="card card-ml">
+    <span class="icon"><svg><use href="#icon-bar-chart"/></svg></span>
+    <h3>ML Trained Model</h3>
+    <p>VotingClassifier ensemble — RandomForest (300 trees) + GradientBoosting (200 estimators) trained on 5,000 real Twitter accounts with 92.97% accuracy.</p>
+    <ul class="ml-stats">
+      <li><span class="ml-label">Dataset</span><span class="ml-val">5,000 accounts</span></li>
+      <li><span class="ml-label">Accuracy</span><span class="ml-val ml-accent">92.97%</span></li>
+      <li><span class="ml-label">Features</span><span class="ml-val">11 signals</span></li>
+      <li><span class="ml-label">Models</span><span class="ml-val">RF + GBM</span></li>
+    </ul>
+  </div>
+</section>
+{% endblock %}

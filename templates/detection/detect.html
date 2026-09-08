@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Detect – FSMD{% endblock %}
+{% block content %}
+<h2 class="page-title">Account Detection</h2>
+<p class="page-sub">Paste a social media profile URL to analyze its authenticity.</p>
+
+<div class="supported-platforms">
+  <span>Supported:</span>
+  <span class="platform-tag"><svg class="ptag-icon"><use href="#icon-user"/></svg>GitHub</span>
+  <span class="platform-tag"><svg class="ptag-icon"><use href="#icon-user"/></svg>Instagram</span>
+  <span class="platform-tag"><svg class="ptag-icon"><use href="#icon-user"/></svg>X / Twitter</span>
+  <span class="platform-tag"><svg class="ptag-icon"><use href="#icon-user"/></svg>Facebook</span>
+  <span class="platform-tag"><svg class="ptag-icon"><use href="#icon-user"/></svg>LinkedIn</span>
+  <span class="platform-tag"><svg class="ptag-icon"><use href="#icon-user"/></svg>TikTok</span>
+  <span class="platform-tag"><svg class="ptag-icon"><use href="#icon-user"/></svg>YouTube</span>
+</div>
+
+<div class="detect-center">
+  <form id="detectForm" class="detect-form card">
+    <div class="form-group url-group">
+      <label>Profile URL</label>
+      <div class="url-input-wrap">
+        <svg class="url-svg-icon"><use href="#icon-link"/></svg>
+        <input type="url" name="url" id="urlInput"
+               placeholder="https://github.com/torvalds"
+               required autocomplete="off" spellcheck="false"/>
+      </div>
+      <p class="url-hint">e.g. https://github.com/username &nbsp;|&nbsp; https://x.com/username</p>
+    </div>
+    <div id="platformBadge" class="platform-detected hidden"></div>
+    <button type="submit" class="btn btn-primary full-width" id="analyzeBtn">
+      <svg class="btn-icon"><use href="#icon-search"/></svg>
+      Analyze Account
+    </button>
+  </form>
+
+  <div id="result" class="result-panel card hidden">
+    <div id="resultBadge" class="result-badge">
+      <svg id="resultIcon" class="result-icon"><use href="#icon-search"/></svg>
+      <span id="resultLabel"></span>
+    </div>
+    <div class="result-meta">
+      <span id="resultPlatform" class="platform-tag"></span>
+      <span id="resultUsername" class="result-user"></span>
+    </div>
+    <div id="ageSourceBadge" class="age-source-badge hidden">
+      <svg class="age-icon"><use href="#icon-calendar"/></svg>
+      <span id="ageSourceText"></span>
+    </div>
+    <div class="result-score">
+      <span>Risk Score</span>
+      <div class="score-bar-wrap">
+        <div id="scoreBar" class="score-bar"></div>
+      </div>
+      <span id="scoreVal"></span>
+    </div>
+    <div class="result-confidence">Model Confidence: <strong id="confVal"></strong>%</div>
+    <div class="prob-bars">
+      <div class="prob-row">
+        <span>Genuine</span>
+        <div class="prob-bar-wrap"><div id="probGenuine" class="prob-bar genuine"></div></div>
+        <span id="probGenuineVal"></span>
+      </div>
+      <div class="prob-row">
+        <span>Suspicious</span>
+        <div class="prob-bar-wrap"><div id="probSuspicious" class="prob-bar suspicious"></div></div>
+        <span id="probSuspiciousVal"></span>
+      </div>
+      <div class="prob-row">
+        <span>Fake</span>
+        <div class="prob-bar-wrap"><div id="probFake" class="prob-bar fake"></div></div>
+        <span id="probFakeVal"></span>
+      </div>
+    </div>
+    <h4>Detected Signals</h4>
+    <ul id="reasonsList"></ul>
+    <h4>Extracted Features</h4>
+    <table id="featuresTable" class="features-table"></table>
+  </div>
+</div>
+{% endblock %}

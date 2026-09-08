@@ -1,0 +1,7 @@
+timestamp,url,platform,username,followers,following,posts,account_age_days,has_profile_pic,is_verified,bio_length,age_source,follower_following_ratio,posts_per_day,username_digit_ratio,username_has_random,label,confidence,score,prob_genuine,prob_suspicious,prob_fake
+2026-09-08T17:25:00Z,https://www.instagram.com/virat.kohli/?__pwa=1,instagram,virat.kohli,272000000,279,1058,365,1,0,68,default,971428.5714,2.8907,0.0,0,Genuine,99.9,0.1,99.9,0.0,0.1
+2026-09-08T17:26:28Z,https://www.instagram.com/engineer_in_shape/?__pwa=1,instagram,engineer_in_shape,71,180,3,365,1,0,78,default,0.3923,0.0082,0.0,0,Fake,57.0,35.5,0.0,43.0,14.0
+2026-09-08T17:27:19Z,https://www.instagram.com/dhruvsinghpksenger/?__pwa=1,instagram,dhruvsinghpksenger,1217,506,137,365,1,0,77,default,2.4004,0.3743,0.0,0,Genuine,92.0,8.0,92.0,0.0,8.0
+2026-09-08T17:28:30Z,https://www.instagram.com/kvenkatesh_2026/?__pwa=1,instagram,kvenkatesh_2026,573,560,18,365,1,0,200,default,1.0214,0.0492,0.25,1,Genuine,97.6,2.4,97.6,0.0,2.4
+2026-09-08T17:28:58Z,https://www.instagram.com/thefactpage01/?__pwa=1,instagram,thefactpage01,9303,102,261,365,1,0,75,default,90.3204,0.7131,0.1429,0,Genuine,95.9,4.1,95.9,0.0,4.1
+2026-09-08T18:24:39Z,https://www.instagram.com/aswad_kulkarni/?__pwa=1,instagram,aswad_kulkarni,596,721,4,365,1,0,74,default,0.8255,0.0109,0.0,0,Genuine,89.0,11.0,89.0,0.0,11.0
