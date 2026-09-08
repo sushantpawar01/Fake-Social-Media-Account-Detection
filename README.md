@@ -2,7 +2,7 @@
 
 A web application that detects fake and genuine social media accounts by fetching real profile data, extracting behavioral features, and running them through a trained ML ensemble model.
 
-> Built by **Team Hack Attack**
+
 
 ---
 
