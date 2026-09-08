@@ -1,7 +1,7 @@
 # Fake Social Media Account Detection (FSMD) — Project Report
 
 > **Project Name:** Fake Social Media Account Detection (FSMD)  
-> **Team:** Team Hack Attack  
+
 > **Framework / Tech Stack:** Python 3.11, Flask 3, scikit-learn, Vanilla CSS3/JS, HTML5 Canvas API  
 > **Status:** Production-Ready / Fully Functional  
 
