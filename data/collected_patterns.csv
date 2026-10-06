@@ -8,3 +8,4 @@ timestamp,url,platform,username,followers,following,posts,account_age_days,has_p
 2026-09-08T21:06:46Z,https://github.com/sushantpawar01,github,sushantpawar01,0,2,17,1322,1,0,154,github-api,0.0,0.0128,0.1333,0,Genuine,85.9,14.1,85.9,0.0,14.1
 2026-09-08T21:07:10Z,https://www.instagram.com/aswad_kulkarni/?__pwa=1,instagram,aswad_kulkarni,596,721,4,365,1,0,74,default,0.8255,0.0109,0.0,0,Genuine,89.0,11.0,89.0,0.0,11.0
 2026-10-06T02:29:22Z,https://github.com/torvalds,github,torvalds,326429,0,12,5511,1,0,0,github-api,326429.0,0.0022,0.0,0,Fake,56.9,35.4,0.0,43.1,13.8
+2026-10-06T03:00:59Z,https://github.com/torvalds,github,torvalds,326430,0,12,5511,1,0,0,github-api,326430.0,0.0022,0.0,0,Fake,56.9,35.4,0.0,43.1,13.8

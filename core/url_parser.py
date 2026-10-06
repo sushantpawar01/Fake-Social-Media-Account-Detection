@@ -34,7 +34,7 @@ def parse_url(url: str) -> dict:
 def fetch_github(username: str) -> dict:
     """Fetch real public data from GitHub API (no auth needed)."""
     try:
-        r = requests.get(f"https://api.github.com/users/{username}", headers=HEADERS, timeout=8)
+        r = requests.get(f"https://api.github.com/users/{username}", headers=HEADERS, timeout=3)
         if r.status_code == 200:
             d = r.json()
             return {
@@ -80,16 +80,14 @@ def fetch_by_url(url: str) -> dict:
 
 
 def _fetch_instagram(url: str, username: str) -> dict:
-    """Fetch Instagram profile - tries multiple User-Agent strings to get og:description."""
+    """Fetch Instagram profile - tries User-Agent strings with strict serverless timeouts."""
     agents = [
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-        "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1",
         "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)",
-        "Twitterbot/1.0",
     ]
     for agent in agents:
         try:
-            r = requests.get(url, headers={**HEADERS, "User-Agent": agent}, timeout=10)
+            r = requests.get(url, headers={**HEADERS, "User-Agent": agent}, timeout=2.5)
             d = _parse_instagram(r.text, username)
             if d["followers"] > 0 or d["posts"] > 0:
                 return d
@@ -109,7 +107,7 @@ def _scrape_page(url: str, username: str, platform: str) -> dict:
     age_source = "default"
 
     try:
-        r = requests.get(url, headers=HEADERS, timeout=10)
+        r = requests.get(url, headers=HEADERS, timeout=3.5)
         html = r.text
 
         # --- Bio: meta description ---

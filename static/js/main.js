@@ -37,6 +37,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById("analyzeBtn");
     btn.innerHTML = `${svgUse("icon-loader", "spin")} Analyzing...`;
     btn.disabled = true;
+
+    hideError();
     document.getElementById("result").classList.add("hidden");
 
     try {
@@ -45,11 +47,22 @@ document.addEventListener("DOMContentLoaded", () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url }),
       });
-      const data = await res.json();
-      if (data.error) showError(data.error);
-      else renderResult(data);
-    } catch {
-      showError("Detection failed. Check your connection and try again.");
+
+      let data;
+      try {
+        data = await res.json();
+      } catch (jsonErr) {
+        showError(`Server error (${res.status}): Unable to parse response.`);
+        return;
+      }
+
+      if (!res.ok || data.error) {
+        showError(data.error || `Server returned status ${res.status}`);
+      } else {
+        renderResult(data);
+      }
+    } catch (err) {
+      showError("Connection error: Unable to reach server. Please try again.");
     } finally {
       btn.innerHTML = `${svgUse("icon-search")} Analyze Account`;
       btn.disabled = false;
@@ -130,8 +143,18 @@ function renderResult(data) {
 }
 
 function showError(msg) {
-  const panel = document.getElementById("result");
-  panel.classList.remove("hidden");
-  panel.innerHTML = `<div class="error-msg">${svgUse("icon-error")} ${msg}</div>`;
-  panel.scrollIntoView({ behavior: "smooth" });
+  const errorBox = document.getElementById("errorBox");
+  if (errorBox) {
+    errorBox.innerHTML = `${svgUse("icon-alert", "error-icon")} ${msg}`;
+    errorBox.classList.remove("hidden");
+    errorBox.scrollIntoView({ behavior: "smooth" });
+  }
+}
+
+function hideError() {
+  const errorBox = document.getElementById("errorBox");
+  if (errorBox) {
+    errorBox.classList.add("hidden");
+    errorBox.innerHTML = "";
+  }
 }
