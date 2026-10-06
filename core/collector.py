@@ -1,9 +1,30 @@
 import csv
 import os
+import shutil
 from datetime import datetime, timezone
 
-_CSV_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "collected_patterns.csv")
-_CSV_PATH = os.path.normpath(_CSV_PATH)
+_DEFAULT_CSV_PATH = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", "data", "collected_patterns.csv"))
+
+
+def _get_target_csv_path() -> str:
+    """Return a writable CSV path (uses /tmp on serverless environments like Vercel)."""
+    if os.path.exists(_DEFAULT_CSV_PATH):
+        if os.access(_DEFAULT_CSV_PATH, os.W_OK):
+            return _DEFAULT_CSV_PATH
+    else:
+        parent = os.path.dirname(_DEFAULT_CSV_PATH)
+        if os.path.exists(parent) and os.access(parent, os.W_OK):
+            return _DEFAULT_CSV_PATH
+
+    # Serverless / Read-only fallback -> write to /tmp
+    tmp_path = os.path.join("/tmp", "collected_patterns.csv")
+    if not os.path.exists(tmp_path) and os.path.exists(_DEFAULT_CSV_PATH):
+        try:
+            shutil.copyfile(_DEFAULT_CSV_PATH, tmp_path)
+        except Exception:
+            pass
+    return tmp_path
+
 
 # All columns saved per detection
 _COLUMNS = [
@@ -50,8 +71,9 @@ def save(url: str, account_data: dict, result: dict):
         "prob_fake":               probs.get("Fake", 0),
     }
 
-    write_header = not os.path.exists(_CSV_PATH) or os.path.getsize(_CSV_PATH) == 0
-    with open(_CSV_PATH, "a", newline="", encoding="utf-8") as f:
+    target_path = _get_target_csv_path()
+    write_header = not os.path.exists(target_path) or os.path.getsize(target_path) == 0
+    with open(target_path, "a", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=_COLUMNS)
         if write_header:
             writer.writeheader()
@@ -59,4 +81,7 @@ def save(url: str, account_data: dict, result: dict):
 
 
 def csv_path() -> str:
-    return _CSV_PATH
+    target = _get_target_csv_path()
+    if os.path.exists(target):
+        return target
+    return _DEFAULT_CSV_PATH
